@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced Video Screenshot & Subtitle Extractor</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="container mt-4">
+        <h1 class="text-center mb-4">Enhanced Video Screenshot & Subtitle Extractor</h1>
+        <form method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
+            <div class="card mb-3">
+                <div class="card-header"><strong>File Selection</strong></div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label for="video_file" class="form-label">Video File</label>
+                        <input type="file" class="form-control" id="video_file" name="video_file" accept=".mp4,.avi,.mov,.mkv,.wmv,.flv" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="srt_file" class="form-label">SRT File</label>
+                        <input type="file" class="form-control" id="srt_file" name="srt_file" accept=".srt" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-header"><strong>Export Formats</strong></div>
+                <div class="card-body">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="export_docx" name="export_docx" value="true">
+                        <label class="form-check-label" for="export_docx">DOCX</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="export_pdf" name="export_pdf" value="true">
+                        <label class="form-check-label" for="export_pdf">PDF</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="export_html" name="export_html" value="true">
+                        <label class="form-check-label" for="export_html">HTML</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="export_md" name="export_md" value="true">
+                        <label class="form-check-label" for="export_md">Markdown</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="export_epub" name="export_epub" value="true">
+                        <label class="form-check-label" for="export_epub">EPUB</label>
+                    </div>
+                    <div class="mt-3">
+                        <label for="subtitles_per_page" class="form-label">Subtitles per Page</label>
+                        <input type="number" class="form-control w-25" id="subtitles_per_page" name="subtitles_per_page" value="3" min="1">
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-header"><strong>Document Title</strong></div>
+                <div class="card-body">
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox" id="use_video_name" name="use_video_name">
+                        <label class="form-check-label" for="use_video_name">Use video file name as title</label>
+                    </div>
+                    <div class="mb-3">
+                        <label for="custom_title" class="form-label">Custom Title</label>
+                        <input type="text" class="form-control" id="custom_title" name="custom_title" value="Video Subtitle Report">
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-header"><strong>Formatting Options</strong></div>
+                <div class="card-body">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="no_spacing" name="no_spacing" checked>
+                        <label class="form-check-label" for="no_spacing">No line spacing</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="narrow_borders" name="narrow_borders" checked>
+                        <label class="form-check-label" for="narrow_borders">Narrow borders</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="add_bookmarks" name="add_bookmarks" checked>
+                        <label class="form-check-label" for="add_bookmarks">Add bookmarks</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="dark_theme" name="dark_theme">
+                        <label class="form-check-label" for="dark_theme">Dark theme</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="page_organization" name="page_organization" checked>
+                        <label class="form-check-label" for="page_organization">One subtitle per page</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="create_folder" name="create_folder" checked>
+                        <label class="form-check-label" for="create_folder">Create output folder</label>
+                    </div>
+                    <div class="mt-3">
+                        <label class="form-label">Heading Style</label>
+                        <div>
+                            <input type="radio" id="heading_numbered" name="heading_style" value="numbered" checked class="form-check-input">
+                            <label for="heading_numbered" class="form-check-label">Numbered</label>
+                            <input type="radio" id="heading_simple" name="heading_style" value="simple" class="form-check-input ms-3">
+                            <label for="heading_simple" class="form-check-label">Simple</label>
+                            <input type="radio" id="heading_time" name="heading_style" value="time" class="form-check-input ms-3">
+                            <label for="heading_time" class="form-check-label">Time-based</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-header"><strong>Color Options</strong></div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label for="text_color" class="form-label">Subtitle Text Color</label>
+                        <input type="color" class="form-control form-control-color" id="text_color" name="text_color" value="#000000">
+                    </div>
+                    <div class="mb-3">
+                        <label for="label_color" class="form-label">"Text:" Label Color</label>
+                        <input type="color" class="form-control form-control-color" id="label_color" name="label_color" value="#FF0000">
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-lg w-100">Process Video</button>
+        </form>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
